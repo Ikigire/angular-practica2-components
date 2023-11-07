@@ -1,14 +1,30 @@
-import { Component } from "@angular/core";
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { Tarea } from "../mi-componente/models/tarea.model";
+import { TareaCardItem } from '../mi-componente/models/tarea-card-item.model';
 
 @Component({
     selector: 'app-tarea-card',
     templateUrl: './tarea-card.component.html'
 })
 export class TareaCardComponent {
-    tareas: Tarea[] = [];
+    @Input()
+    tarea!: Tarea;
+    @Input()
+    indice: number = -1;
 
-    cambiarStatus(index: number, status:string): void {
-        
+    @Output("onStatusChange") emitter: EventEmitter<TareaCardItem>;
+
+    constructor() {
+        this.emitter = new EventEmitter();
+    }
+
+
+    cambiarStatus(status:string): void {
+        this.tarea.status = status;
+
+        this.emitter.emit({
+            indice: this.indice,
+            tarea: this.tarea
+        });
     }
 }

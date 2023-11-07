@@ -1,4 +1,4 @@
-<div class="card p-1 col-12 col-sm-6 col-lg-6" *ngFor="let tarea of tareas; let i = index">
+<div class="card" *ngIf="tarea">
     <div class="card-header text-center text-white" [ngClass]="{
                         'bg-primary': tarea.status == 'Pendiente',
                         'bg-success': tarea.status == 'Completado',
@@ -19,10 +19,10 @@
             {{tarea.status}}
         </p>
         <div class="text-end">
-            <button class="btn btn-small btn-danger" (click)="cambiarStatus(i, 'Retrasado')"
+            <button class="btn btn-small btn-danger" (click)="cambiarStatus('Retrasado')"
                 *ngIf="tarea.status == 'Pendiente'">R</button>
 
-            <button class="btn btn-small btn-success" (click)="cambiarStatus(i, 'Completado')"
+            <button class="btn btn-small btn-success" (click)="cambiarStatus('Completado')"
                 *ngIf="tarea.status != 'Completado'">C</button>
         </div>
     </div>

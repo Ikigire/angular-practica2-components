@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Tarea } from './models/tarea.model';
 import { MenuItem } from './models/menu-item.model';
+import { TareaCardItem } from './models/tarea-card-item.model';
+import { ActiveMenuItem } from './models/active-menu-item.model';
 
 @Component({
   selector: 'app-mi-componente',
@@ -10,19 +12,20 @@ import { MenuItem } from './models/menu-item.model';
 export class MiComponenteComponent implements OnInit {
   // public menuItems: {item:string, active:boolean}[] = [];
   // Opciones para el menú
-  activeMenuItem: MenuItem = {item: 'Mis tareas', active: false};
+  activeMenuItem: MenuItem = { item: 'Mis tareas', active: false };
+  activeMenuItemIndex: number = 1;
   // public tareas: {titulo:string, descripcion:string, status:string}[] = [];
   // Lista de tareas guardadas
   tareas: Tarea[] = [];
   // Objeto para agregar tareas
   newTarea: Tarea = {
-    titulo: 'l,askdjaslkdhnaskjd', 
+    titulo: 'l,askdjaslkdhnaskjd',
     descripcion: '',
     status: 'Pendiente'
   };
 
   constructor() {
-    
+
   }
 
   ngOnInit(): void {
@@ -32,11 +35,28 @@ export class MiComponenteComponent implements OnInit {
     }
   }
 
-  public catchMenuItem(item: MenuItem): void {
-    this.activeMenuItem = item;
+  public catchMenuItem(item: ActiveMenuItem): void {
+    this.activeMenuItem = item.menuItem;
+    this.activeMenuItemIndex = item.activeIndex;
+    console.log("Item activo: ",this.activeMenuItemIndex);
+    
   }
 
   private almacenarDatos(): void {
     localStorage.setItem("tareas", JSON.stringify(this.tareas));
+  }
+
+  catchOnStatusChange(info: TareaCardItem) {
+    let { indice, tarea } = info;
+    this.tareas[indice] = tarea;
+  }
+
+  catchOnAddTarea(tarea: Tarea) {
+    this.tareas.push(tarea);
+    // Navegar a la lista
+    this.activeMenuItemIndex = 1;
+    console.log("Item activo: ",this.activeMenuItemIndex);
+    // Almacenar los datos
+    this.almacenarDatos();
   }
 }
