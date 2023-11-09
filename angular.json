@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "practica1": {
+    "angular-practica2-components": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/practica1",
+            "outputPath": "dist/angular-practica2-components",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "practica1:build:production"
+              "browserTarget": "angular-practica2-components:build:production"
             },
             "development": {
-              "browserTarget": "practica1:build:development"
+              "browserTarget": "angular-practica2-components:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -71,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "practica1:build"
+            "browserTarget": "angular-practica2-components:build"
           }
         },
         "test": {
@@ -96,6 +96,6 @@
     }
   },
   "cli": {
-    "analytics": "302b700f-b636-4007-be41-f8bb7042bd3c"
+    "analytics": "b37955eb-2d65-4883-bbd2-259299f67c66"
   }
 }

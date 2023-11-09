@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Tarea } from './models/tarea.model';
-import { MenuItem } from './models/menu-item.model';
-import { TareaCardItem } from './models/tarea-card-item.model';
-import { ActiveMenuItem } from './models/active-menu-item.model';
+import { Component, OnInit, ViewChild, signal } from '@angular/core';
+import { ActiveMenuItem } from '../models/active-menu-item.model';
+import { MenuItem } from '../models/menu-item.model';
+import { TareaCardItem } from '../models/tarea-card-item.model';
+import { Tarea } from '../models/tarea.model';
+import { MenuComponent } from '../menu/menu.component';
 
 @Component({
   selector: 'app-mi-componente',
@@ -49,6 +50,7 @@ export class MiComponenteComponent implements OnInit {
   catchOnStatusChange(info: TareaCardItem) {
     let { indice, tarea } = info;
     this.tareas[indice] = tarea;
+    this.almacenarDatos()
   }
 
   catchOnAddTarea(tarea: Tarea) {
